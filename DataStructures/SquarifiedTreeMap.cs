@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+	Credit to Pascal Laurin for original SquarifiedTreeMap code
+	http://pascallaurin42.blogspot.com/2013/12/implementing-treemap-in-c.html
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +13,35 @@ namespace RTFP.DataStructures
 {
 	public class SquarifiedTreeMap
 	{
+		public class SliceResult<T>
+		{
+			public IEnumerable<Element<T>> Elements { get; set; }
+			public double ElementsSize { get; set; }
+			public IEnumerable<Element<T>> RemainingElements { get; set; }
+		}
+
+		public class Slice<T>
+		{
+			public double Size { get; set; }
+			public IEnumerable<Element<T>> Elements { get; set; }
+			public IEnumerable<Slice<T>> SubSlices { get; set; }
+		}
+
+		public class Element<T>
+		{
+			public T Object { get; set; }
+			public double Value { get; set; }
+		}
+
+		public class SliceRectangle<T>
+		{
+			public Slice<T> Slice { get; set; }
+			public int X { get; set; }
+			public int Y { get; set; }
+			public int Width { get; set; }
+			public int Height { get; set; }
+		}
+
 		public static Slice<T> GetSlice<T>(IEnumerable<Element<T>> elements, double totalSize, double sliceWidth)
 		{
 			if (!elements.Any()) return null;
@@ -51,26 +85,6 @@ namespace RTFP.DataStructures
 				ElementsSize = current,
 				RemainingElements = remainingElements
 			};
-		}
-
-		public class SliceResult<T>
-		{
-			public IEnumerable<Element<T>> Elements { get; set; }
-			public double ElementsSize { get; set; }
-			public IEnumerable<Element<T>> RemainingElements { get; set; }
-		}
-
-		public class Slice<T>
-		{
-			public double Size { get; set; }
-			public IEnumerable<Element<T>> Elements { get; set; }
-			public IEnumerable<Slice<T>> SubSlices { get; set; }
-		}
-
-		public class Element<T>
-		{
-			public T Object { get; set; }
-			public double Value { get; set; }
 		}
 
 		public static IEnumerable<SliceRectangle<T>> GetRectangles<T>(Slice<T> slice, int width, int height)
@@ -123,15 +137,6 @@ namespace RTFP.DataStructures
 				else if (subSlice.Elements.Count() == 1)
 					yield return subRect;
 			}
-		}
-
-		public class SliceRectangle<T>
-		{
-			public Slice<T> Slice { get; set; }
-			public int X { get; set; }
-			public int Y { get; set; }
-			public int Width { get; set; }
-			public int Height { get; set; }
 		}
 	}
 }
