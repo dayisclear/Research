@@ -26,5 +26,17 @@ namespace RTFP.Generator.FloorPlan
 
 			return sb.ToString();
 		}
+
+		public int[] GetAreaArray()
+		{
+			List<int> list = new List<int>();
+
+			Traverse(this, new DataStructures.TreeVisitor<Room>(delegate(Room r)
+			{
+				list.Add(r.Area);
+			}));
+
+			return list.ToArray();
+		}
 	}
 }

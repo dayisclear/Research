@@ -34,7 +34,7 @@ namespace RTFP.Generator.FloorPlan
 			Constraints.Add("AreaRooms", new MinMax(1200, 2400));
 
 			Constraints.Add("LivingRooms", new MinMax(1, 1));
-			Constraints.Add("AreaLivingRooms", new MinMax(200, 400));
+			Constraints.Add("AreaLivingRooms", new MinMax(400, 800));
 
 			Constraints.Add("BedRooms", new MinMax(1, 2));
 			Constraints.Add("AreaBedRooms", new MinMax(200, 400));
@@ -52,7 +52,7 @@ namespace RTFP.Generator.FloorPlan
 			FloorPlan floorplan = new FloorPlan(main);
 
 			// rooms = main + roll
-			int rooms = (int) Constraints.GenerateValue("Rooms") - 1;
+			int rooms = (int) Constraints.GenerateValue("Rooms");
 			for(int i = 0; i < rooms; i++)
 			{
 				floorplan.AddChildToParent(main, GenerateValidRoom(RoomType.BedRoom));

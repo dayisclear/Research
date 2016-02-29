@@ -17,17 +17,20 @@ namespace RTFP
 		{
 			SuburbanGenerator generator = new SuburbanGenerator();
 			FloorPlan fp = generator.GenerateFloorPlan();
+
+			GenerateFloorPlan(fp.GetAreaArray());
+
 			Console.WriteLine(fp);
-			Console.Read();
+			
 		}
 
-		public static void GenerateFloorPlan()
+		public static void GenerateFloorPlan(int[] arr)
 		{
 			const int Width = 400;
 			const int Height = 300;
 			const double MinSliceRatio = 0.35;
 
-			var elements = new[] { 24, 45, 32, 87, 34, 58, 10, 4, 5, 9, 52, 34 }
+			var elements = arr
 				.Select(x => new SquarifiedTreeMap.Element<string> { Object = x.ToString(), Value = x })
 				.OrderByDescending(x => x.Value)
 				.ToList();
