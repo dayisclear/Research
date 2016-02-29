@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 using RTFP.DataStructures;
-using System.Drawing;
+using RTFP.Generator.FloorPlan;
 
 
 namespace RTFP
@@ -14,7 +15,10 @@ namespace RTFP
 	{
 		static void Main()
 		{
-			GenerateFloorPlan();
+			SuburbanGenerator generator = new SuburbanGenerator();
+			FloorPlan fp = generator.GenerateFloorPlan();
+			Console.WriteLine(fp);
+			Console.Read();
 		}
 
 		public static void GenerateFloorPlan()

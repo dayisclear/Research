@@ -31,7 +31,7 @@ namespace RTFP.Generator.FloorPlan
 			// # rooms, # bed rooms, # bathrooms, # kitchens
 			// % liklihood of bathroom/closet in bedrooms
 			Constraints.Add("Rooms", new MinMax(1, 4));
-			Constraints.Add("AreaRooms", new MinMax(400, 1200));
+			Constraints.Add("AreaRooms", new MinMax(1200, 2400));
 
 			Constraints.Add("LivingRooms", new MinMax(1, 1));
 			Constraints.Add("AreaLivingRooms", new MinMax(200, 400));
@@ -48,17 +48,46 @@ namespace RTFP.Generator.FloorPlan
 
 		public FloorPlan GenerateFloorPlan()
 		{
-			Room lRoom = new Room(RoomType.LivingRoom);
+			Room main = GenerateValidRoom(RoomType.LivingRoom);
+			FloorPlan floorplan = new FloorPlan(main);
 
-			GenericTree<Room> tree = new GenericTree<Room>(lRoom);
-			tree.AddChildToParent(lRoom, new Room(RoomType.BedRoom));
+			// rooms = main + roll
+			int rooms = (int) Constraints.GenerateValue("Rooms") - 1;
+			for(int i = 0; i < rooms; i++)
+			{
+				floorplan.AddChildToParent(main, GenerateValidRoom(RoomType.BedRoom));
+			}
 
-			return (FloorPlan) tree;
+			return floorplan;
 		}
 
 		private Room GenerateValidRoom(RoomType type)
-		{	
-			return null;
+		{
+			Room room = new Room(type);
+			switch(type)
+			{
+				case RoomType.LivingRoom:
+					{
+						room.Area = (int) Constraints.GenerateValue("AreaLivingRooms");
+					}
+					break;
+				case RoomType.BedRoom:
+					{
+						room.Area = (int) Constraints.GenerateValue("AreaBedRooms");
+					}
+					break;
+				case RoomType.Kitchen:
+					{
+						room.Area = (int) Constraints.GenerateValue("AreaKitchens");
+					}
+					break;
+				case RoomType.Bathroom:
+					{
+						room.Area = (int) Constraints.GenerateValue("AreaExtraChildRooms");
+					}
+					break;
+			}
+			return room;
 		}
 	}
 }

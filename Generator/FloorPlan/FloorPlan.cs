@@ -14,5 +14,17 @@ namespace RTFP.Generator.FloorPlan
 		{
 
 		}
+
+		public override string ToString()
+		{
+			StringBuilder sb = new StringBuilder();
+
+			Traverse(this, new DataStructures.TreeVisitor<Room>(delegate(Room r)
+			{
+				sb.AppendLine(String.Format("node: {0}, area: {1}", r.Type.ToString(), r.Area));
+			}));
+
+			return sb.ToString();
+		}
 	}
 }
