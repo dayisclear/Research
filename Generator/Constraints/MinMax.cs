@@ -16,12 +16,12 @@ namespace RTFP.Generator.Constraints
 			this.max = max;
 		}
 
-		public int ProduceValidValue()
+		public override object ProduceValidValue()
 		{
 			return GetRandomNumber(min, max);
 		}
 
-		public bool isValidValue(object value)
+		public override bool isValidValue(object value)
 		{
 			return isValidValue((int) value);
 		}

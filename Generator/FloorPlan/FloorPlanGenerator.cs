@@ -8,7 +8,7 @@ using RTFP.Generator.Constraints;
 
 namespace RTFP.Generator.FloorPlan
 {
-	interface Generator
+	interface FloorPlanGenerator
 	{
 		ConstraintSet Constraints { get; set; }
 		FloorPlan GenerateFloorPlan();

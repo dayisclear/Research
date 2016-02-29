@@ -50,11 +50,12 @@
     <Compile Include="Generator\Constraints\Constraint.cs" />
     <Compile Include="Generator\Constraints\ConstraintSet.cs" />
     <Compile Include="Generator\Constraints\MinMax.cs" />
+    <Compile Include="Generator\FloorPlan\FloorPlanGenerator.cs" />
     <Compile Include="Generator\FloorPlan\FloorPlan.cs" />
     <Compile Include="Generator\FloorPlan\Room.cs" />
     <Compile Include="DataStructures\GenericTree.cs" />
     <Compile Include="DataStructures\SquarifiedTreeMap.cs" />
-    <Compile Include="Generator\FloorPlan\Generator.cs" />
+    <Compile Include="Generator\Generator.cs" />
     <Compile Include="Generator\FloorPlan\SuburbanGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
