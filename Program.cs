@@ -30,7 +30,7 @@ namespace RTFP
 
 			#region temporary drawing code
 			var gfx = Graphics.FromImage(bmp);
-			gfx.FillRectangle(Brushes.Blue, new RectangleF(0, 0, width, height));
+			gfx.FillRectangle(Brushes.White, new RectangleF(0, 0, width, height));
 			int Width = 250, Height = 250;
 			const double MinSliceRatio = 0.35;
 			var elements = fp.GetAreaArray()
@@ -46,8 +46,8 @@ namespace RTFP
 				gfx.DrawRectangle(Pens.Black,
 				 new Rectangle(r.X + 5, r.Y + 5, r.Width, r.Height));
 
-				gfx.DrawString("Area: " + r.Slice.Elements.First().Object.ToString(), font,
-				 Brushes.White, r.X + 10, r.Y + 10);
+				gfx.DrawString(r.Slice.Elements.First().Object.ToString(), font,
+				 Brushes.Black, r.X + 10, r.Y + 10);
 			}
 			#endregion
 
