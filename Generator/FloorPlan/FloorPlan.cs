@@ -26,7 +26,7 @@ namespace RTFP.Generator.FloorPlan
 			return sb.ToString();
 		}
 
-		private int[] GetAreaArray()
+		public int[] GetAreaArray()
 		{
 			List<int> list = new List<int>();
 
