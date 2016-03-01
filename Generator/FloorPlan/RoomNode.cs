@@ -65,10 +65,15 @@ namespace RTFP.Generator.FloorPlan
 				Vertex v3 = new Vertex(r.X + r.Width, r.Y);				// Bottom-right corner
 				Vertex v4 = new Vertex(r.X + r.Width, r.Y + r.Height);	// Bottom-left corner
 
-				edges.Add(new Edge(v1, v2));
-				edges.Add(new Edge(v2, v4));
-				edges.Add(new Edge(v4, v3));
-				edges.Add(new Edge(v3, v1));
+				edges.Add(new Edge(ref v1, ref v2));
+				edges.Add(new Edge(ref v2, ref v4));
+				edges.Add(new Edge(ref v4, ref v3));
+				edges.Add(new Edge(ref v3, ref v1));
+
+				vertices.Add(v1);
+				vertices.Add(v2);
+				vertices.Add(v3);
+				vertices.Add(v4);
 
 				// Build our rooms internal tree map
 				foreach (var child in r.Slice.Elements)

@@ -10,7 +10,7 @@ namespace RTFP.DataStructures.Geometry
 	{
 		public Vertex Source, Destination;
 
-		public Edge(Vertex src, Vertex dst)
+		public Edge(ref Vertex src, ref Vertex dst)
 		{
 			this.Source = src; this.Destination = dst;
 		}
