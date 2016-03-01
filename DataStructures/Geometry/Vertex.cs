@@ -28,5 +28,10 @@ namespace RTFP.DataStructures.Geometry
 
 			return v1;
 		}
+
+		public override string ToString()
+		{
+			return String.Format("<{0}, {1}>", X, Y);
+		}
 	}
 }

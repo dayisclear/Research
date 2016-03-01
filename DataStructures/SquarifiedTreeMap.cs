@@ -112,7 +112,7 @@ namespace RTFP.DataStructures
 
 				if (isHorizontalSplit)
 				{
-					rectSize = (int)Math.Round(sliceRectangle.Width * subSlice.Size);
+					rectSize = (int) Math.Floor(sliceRectangle.Width * subSlice.Size);
 					subRect.X = sliceRectangle.X + currentPos;
 					subRect.Y = sliceRectangle.Y;
 					subRect.Width = rectSize;
@@ -120,7 +120,7 @@ namespace RTFP.DataStructures
 				}
 				else
 				{
-					rectSize = (int)Math.Round(sliceRectangle.Height * subSlice.Size);
+					rectSize = (int) Math.Floor(sliceRectangle.Height * subSlice.Size);
 					subRect.X = sliceRectangle.X;
 					subRect.Y = sliceRectangle.Y + currentPos;
 					subRect.Width = sliceRectangle.Width;

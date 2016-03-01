@@ -14,5 +14,10 @@ namespace RTFP.DataStructures.Geometry
 		{
 			this.Source = src; this.Destination = dst;
 		}
+
+		public override string ToString()
+		{
+			return String.Format("{0} -> {1}", Source, Destination);
+		}
 	}
 }
