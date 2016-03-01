@@ -33,7 +33,7 @@ namespace RTFP.Generator.FloorPlan
 		public FloorPlan ToFloorPlan()
 		{
 			// Default house size is 500x500
-			return ToFloorPlan(500, 500);
+			return ToFloorPlan(200, 200);
 		}
 
 		public FloorPlan ToFloorPlan(int Width, int Height)
@@ -73,18 +73,22 @@ namespace RTFP.Generator.FloorPlan
 				// Build our rooms internal tree map
 				foreach (var child in r.Slice.Elements)
 				{
-					// Child tree map is (r.Width x r.Height) 
-					FloorPlan fp = child.Object.ToFloorPlan(r.Width, r.Height);
+					// We ignore ourself and nodes without children
+					if (child.Object != null && child.Object.Children.Count > 0)
+					{
+						// Child tree map is (r.Width x r.Height) 
+						FloorPlan fp = child.Object.ToFloorPlan(r.Width, r.Height);
 
-					// Child tree map uses local coordinates of parent room,
-					// we must off set these for our global floor plan
-					Vertex offset = new Vertex(r.X, r.Y);
+						// Child tree map uses local coordinates of parent room,
+						// we must off set these for our global floor plan
+						Vertex offset = new Vertex(r.X, r.Y);
 
-					foreach (Vertex v in fp.Vertices)
-						v.Add(offset);
+						foreach (Vertex v in fp.Vertices)
+							v.Add(offset);
 
-					vertices.AddRange(fp.Vertices);
-					edges.AddRange(fp.Edges);
+						vertices.AddRange(fp.Vertices);
+						edges.AddRange(fp.Edges);
+					}
 				}
 			}
 			

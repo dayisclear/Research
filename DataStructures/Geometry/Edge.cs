@@ -8,7 +8,8 @@ namespace RTFP.DataStructures.Geometry
 {
 	public class Edge
 	{
-		Vertex Source, Destination;
+		public Vertex Source, Destination;
+
 		public Edge(Vertex src, Vertex dst)
 		{
 			this.Source = src; this.Destination = dst;

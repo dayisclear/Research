@@ -8,7 +8,7 @@ namespace RTFP.DataStructures.Geometry
 {
 	public class Vertex
 	{
-		int X, Y;
+		public int X, Y;
 
 		public Vertex(int x, int y)
 		{
