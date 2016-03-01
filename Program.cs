@@ -28,7 +28,7 @@ namespace RTFP
 		private static void DrawFloorPlan(FloorPlan fp)
 		{
 			int width = 252, height = 252;
-			Brush[] brushes = new Brush[] { Brushes.Gray, Brushes.DarkGray, Brushes.LightGray, Brushes.Brown, Brushes.BurlyWood };
+			Brush[] brushes = new Brush[] { Brushes.Gray, Brushes.DarkGray, Brushes.LightGray, Brushes.LightSlateGray, Brushes.BurlyWood };
 
 			// Create our canvas to work with
 			var font = new Font("Arial", 8);
