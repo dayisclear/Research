@@ -26,7 +26,7 @@ namespace RTFP
 
 		private static void DrawFloorPlan(FloorPlan fp)
 		{
-			int width = 500, height = 500;
+			int width = 252, height = 252;
 			
 			// Create our canvas to work with
 			var bmp = new Bitmap(width, height);
@@ -35,13 +35,18 @@ namespace RTFP
 
 			// Draw vertices and edges
 			foreach (Edge e in fp.Edges)
-				gfx.DrawLine(Pens.Black, 
-					new Point(e.Source.X, e.Source.Y), 
+			{
+				gfx.DrawLine(Pens.Black,
+					new Point(e.Source.X, e.Source.Y),
 					new Point(e.Destination.X, e.Destination.Y));
+
+				gfx.DrawRectangle(Pens.Red, new Rectangle(new Point(e.Source.X - 1, e.Source.Y - 1), new Size(2, 2)));
+				gfx.DrawRectangle(Pens.Red, new Rectangle(new Point(e.Destination.X - 1, e.Destination.Y - 1), new Size(2, 2)));
+			}
 
 			// Display form
 			var form = new Form() { AutoSize = true };
-			form.Controls.Add(new PictureBox() { Width = width, Height = height, Image = bmp });
+			form.Controls.Add(new PictureBox() { Width = width, Height = height, Image = bmp, Location = new Point(5, 5) });
 			form.ShowDialog();
 		}
 	}
