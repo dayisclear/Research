@@ -49,7 +49,7 @@ namespace RTFP.Generator.FloorPlan
 				.ToList();
 
 			// We want to include our own area inside our tree map
-			nodes.Insert(0, new SquarifiedTreeMap.Element<RoomNode> { Object = null, Value = Area });
+			nodes.Insert(0, new SquarifiedTreeMap.Element<RoomNode> { Object = null, Value = this.Area });
 
 			var slice = SquarifiedTreeMap.GetSlice(nodes, 1, MinSliceRatio);
 			var rectangles = SquarifiedTreeMap.GetRectangles(slice, Width, Height).ToList();
