@@ -29,19 +29,17 @@ namespace RTFP
 			int width = 252, height = 252;
 			
 			// Create our canvas to work with
+			var font = new Font("Arial", 8);
 			var bmp = new Bitmap(width, height);
 			var gfx = Graphics.FromImage(bmp);
+
 			gfx.FillRectangle(Brushes.White, new RectangleF(0, 0, width, height));
 
-			// Draw vertices and edges
-			foreach (Edge e in fp.Edges)
+			// Draw rooms and their types
+			foreach (var r in fp.Rooms)
 			{
-				gfx.DrawLine(Pens.Black,
-					new Point(e.Source.X, e.Source.Y),
-					new Point(e.Destination.X, e.Destination.Y));
-
-				gfx.DrawRectangle(Pens.Red, new Rectangle(new Point(e.Source.X - 1, e.Source.Y - 1), new Size(2, 2)));
-				gfx.DrawRectangle(Pens.Red, new Rectangle(new Point(e.Destination.X - 1, e.Destination.Y - 1), new Size(2, 2)));
+				gfx.DrawRectangle(Pens.Red, new Rectangle(new Point(r.X, r.Y), new Size(r.Width, r.Height)));
+				gfx.DrawString(r.Type.ToString(), font, Brushes.Black, r.X, r.Y);
 			}
 
 			// Display form

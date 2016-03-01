@@ -12,15 +12,18 @@ namespace RTFP.Generator.FloorPlan
 {
 	public class FloorPlan
 	{
-		class Room
+		public class Room
 		{
 			public int X, Y, Width, Height;
 			public RoomType Type;
 		}
 
-		private List<Room> Rooms { get; set; }
-		public List<Edge> Edges { get; set; }
-		public List<Vertex> Vertices { get; set; }
+		public List<Room> Rooms { get; set; }
+
+		public FloorPlan()
+		{
+			this.Rooms = new List<Room>();
+		}
 
 		public void AddRoom(int x, int y, int width, int height, RoomType type)
 		{
@@ -29,8 +32,17 @@ namespace RTFP.Generator.FloorPlan
 
 		public void MergeFloorPlan(FloorPlan fp)
 		{
-			foreach (Room r in fp.Rooms)
+			MergeFloorPlan(fp, 0, 0);
+		}
+
+		public void MergeFloorPlan(FloorPlan fp, int offsetX, int offsetY)
+		{
+			foreach(Room r in fp.Rooms)
+			{
+				r.X += offsetX;
+				r.Y += offsetY;
 				this.Rooms.Add(r);
+			}
 		}
 	}
 }

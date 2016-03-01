@@ -49,59 +49,33 @@ namespace RTFP.Generator.FloorPlan
 				.ToList();
 
 			// We want to include our own area inside our tree map
-			nodes.Insert(0, new SquarifiedTreeMap.Element<RoomNode> { Object = null, Value = this.Area });
+			nodes.Insert(0, new SquarifiedTreeMap.Element<RoomNode> { Object = this, Value = this.Area });
 
 			var slice = SquarifiedTreeMap.GetSlice(nodes, 1, MinSliceRatio);
 			var rectangles = SquarifiedTreeMap.GetRectangles(slice, Width, Height).ToList();
 
-			// Lists for building our floor plan
-			List<Vertex> vertices = new List<Vertex>();
-			List<Edge> edges = new List<Edge>();
+			FloorPlan fp = new FloorPlan();
 
 			// Build our floorplan off our our tree map
 			foreach (var r in rectangles)
 			{
-				// Add our vertices and edges to our list
-				Vertex v1 = new Vertex(r.X, r.Y);						// Top-left corner
-				Vertex v2 = new Vertex(r.X, r.Y + r.Height);			// Top-right corner
-				Vertex v3 = new Vertex(r.X + r.Width, r.Y);				// Bottom-right corner
-				Vertex v4 = new Vertex(r.X + r.Width, r.Y + r.Height);	// Bottom-left corner
-
-				edges.Add(new Edge(ref v1, ref v2));
-				edges.Add(new Edge(ref v2, ref v4));
-				edges.Add(new Edge(ref v4, ref v3));
-				edges.Add(new Edge(ref v3, ref v1));
-				edges.Add(new Edge(ref v4, ref v1));
-
-				vertices.Add(v1);
-				vertices.Add(v2);
-				vertices.Add(v3);
-				vertices.Add(v4);
+				fp.AddRoom(r.X, r.Y, r.Width, r.Height, r.Slice.Elements.First().Object.Type);
 
 				// Build our rooms internal tree map
 				foreach (var child in r.Slice.Elements)
 				{
 					// We ignore ourself and nodes without children
-					if (child.Object != null && child.Object.Children.Count > 0)
+					if (child.Object != this && child.Object.Children.Count > 0)
 					{
-						// Child tree map is (r.Width x r.Height) 
-						FloorPlan fp = child.Object.ToFloorPlan(r.Width, r.Height);
-
 						// Child tree map uses local coordinates of parent room,
-						// we must off set these for our global floor plan
-						Vertex offset = new Vertex(r.X, r.Y);
-
-						foreach (Vertex v in fp.Vertices)
-							v.Add(offset);
-
-						vertices.AddRange(fp.Vertices);
-						edges.AddRange(fp.Edges);
+						// we must offset these and then merge our floorplans
+						fp.MergeFloorPlan(child.Object.ToFloorPlan(r.Width, r.Height), r.X, r.Y);
 					}
 				}
 			}
 			
 			// Return our produced floor plan
-			return new FloorPlan() { Vertices = vertices, Edges = edges };
+			return fp;
 		}
 
 		public override string ToString()
