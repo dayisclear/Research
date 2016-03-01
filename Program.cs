@@ -16,8 +16,12 @@ namespace RTFP
 		static void Main()
 		{
 			SuburbanGenerator generator = new SuburbanGenerator();
-			FloorPlan fp = generator.GenerateFloorPlan();
-			DrawFloorPlan(fp);
+
+			while (true)
+			{
+				FloorPlan fp = generator.GenerateFloorPlan();
+				DrawFloorPlan(fp);
+			}
 		}
 
 		private static void DrawFloorPlan(FloorPlan fp)

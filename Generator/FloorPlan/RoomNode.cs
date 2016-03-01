@@ -32,8 +32,8 @@ namespace RTFP.Generator.FloorPlan
 
 		public FloorPlan ToFloorPlan()
 		{
-			// Default house size is 500x500
-			return ToFloorPlan(200, 200);
+			// Default house size is 250x250
+			return ToFloorPlan(250, 250);
 		}
 
 		public FloorPlan ToFloorPlan(int Width, int Height)

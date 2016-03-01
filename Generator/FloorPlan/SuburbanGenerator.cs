@@ -31,7 +31,7 @@ namespace RTFP.Generator.FloorPlan
 			Constraints.Add("LivingRooms", new MinMax(1, 1));
 			Constraints.Add("AreaLivingRooms", new MinMax(400, 800));
 
-			Constraints.Add("BedRooms", new MinMax(1, 2));
+			Constraints.Add("BedRooms", new MinMax(1, 4));
 			Constraints.Add("AreaBedRooms", new MinMax(200, 400));
 
 			Constraints.Add("Bathrooms", new MinMax(0, 1));
