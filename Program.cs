@@ -30,7 +30,7 @@ namespace RTFP
 			var bmp = new Bitmap(width, height);
 			var gfx = Graphics.FromImage(bmp);
 
-			List<Point> points = fp.GenerateVertices();
+			List<Point> points = fp.Generate2DPoints();
 			foreach (var p in points)
 			{
 				gfx.DrawRectangle(Pens.Black, new Rectangle(p.X + 5, p.Y + 5, 3, 3));

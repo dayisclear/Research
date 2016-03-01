@@ -38,7 +38,7 @@ namespace RTFP.Generator.FloorPlan
 			return list.ToArray();
 		}
 
-		public List<Point> GenerateVertices()
+		public List<Point> Generate2DPoints()
 		{
 			// We need to move width and height to properties of our floor plan,
 			// floor plan structure needs to be reworked 
