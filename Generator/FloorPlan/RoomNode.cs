@@ -15,14 +15,21 @@ namespace RTFP.Generator.FloorPlan
 		ExtraRoom
 	}
 
-	public class Room
+	public class RoomNode
 	{
 		public RoomType Type { get; set; }
 		public int Area { get; set; }
+		public LinkedList<RoomNode> Children { get; set; }
 
-		public Room(RoomType type)
+		public RoomNode(RoomType type)
 		{
 			this.Type = type;
+			this.Children = new LinkedList<RoomNode>();
+		}
+
+		public FloorPlan ToFloorPlan()
+		{
+			return null;
 		}
 	}
 }
