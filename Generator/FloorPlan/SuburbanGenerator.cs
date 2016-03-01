@@ -29,19 +29,19 @@ namespace RTFP.Generator.FloorPlan
 
 			// Temporary constraints until we add building grammar
 			Constraints.Add("LivingRooms", new MinMax(1, 1));
-			Constraints.Add("AreaLivingRooms", new MinMax(400, 800));
+			Constraints.Add("AreaLivingRooms", new MinMax(400, 500));
 
-			Constraints.Add("BedRooms", new MinMax(1, 4));
-			Constraints.Add("AreaBedRooms", new MinMax(200, 400));
+			Constraints.Add("BedRooms", new MinMax(1, 2));
+			Constraints.Add("AreaBedRooms", new MinMax(400, 500));
 
 			Constraints.Add("Bathrooms", new MinMax(0, 1));
-			Constraints.Add("AreaBathrooms", new MinMax(50, 100));
+			Constraints.Add("AreaBathrooms", new MinMax(200, 200));
 
-			Constraints.Add("Kitchens", new MinMax(1, 1));
-			Constraints.Add("AreaKitchens", new MinMax(50, 200));
+			Constraints.Add("Kitchens", new MinMax(0, 1));
+			Constraints.Add("AreaKitchens", new MinMax(200, 200));
 
 			Constraints.Add("ExtraRoom", new MinMax(0, 1));
-			Constraints.Add("AreaCloset", new MinMax(25, 75));
+			Constraints.Add("AreaCloset", new MinMax(100, 100));
 		}
 
 		public FloorPlan GenerateFloorPlan()

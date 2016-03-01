@@ -44,8 +44,8 @@ namespace RTFP.Generator.FloorPlan
 
 			// Generate our Squarified Tree Map
 			var nodes = Children
-				.Select(x => new SquarifiedTreeMap.Element<RoomNode> { Object = x, Value = Area })
-				.OrderByDescending(x => Constraint.GetRandomNumber(-100, 100))
+				.Select(x => new SquarifiedTreeMap.Element<RoomNode> { Object = x, Value = x.Area })
+				.OrderBy(x => Constraint.GetRandomNumber(-100, 100))
 				.ToList();
 
 			// We want to include our own area inside our tree map
@@ -71,6 +71,7 @@ namespace RTFP.Generator.FloorPlan
 				edges.Add(new Edge(ref v2, ref v4));
 				edges.Add(new Edge(ref v4, ref v3));
 				edges.Add(new Edge(ref v3, ref v1));
+				edges.Add(new Edge(ref v4, ref v1));
 
 				vertices.Add(v1);
 				vertices.Add(v2);
