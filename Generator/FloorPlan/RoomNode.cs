@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using RTFP.DataStructures;
 using RTFP.DataStructures.Geometry;
 
+using RTFP.Generator.Constraints;
+
 namespace RTFP.Generator.FloorPlan
 {
 	public enum RoomType
@@ -38,12 +40,12 @@ namespace RTFP.Generator.FloorPlan
 
 		public FloorPlan ToFloorPlan(int Width, int Height)
 		{
-			double MinSliceRatio = 0.35;
+			double MinSliceRatio = Constraint.GetRandomNumber(25, 45) / 100;
 
 			// Generate our Squarified Tree Map
 			var nodes = Children
 				.Select(x => new SquarifiedTreeMap.Element<RoomNode> { Object = x, Value = Area })
-				.OrderByDescending(x => x.Value)
+				.OrderByDescending(x => Constraint.GetRandomNumber(-100, 100))
 				.ToList();
 
 			// We want to include our own area inside our tree map
