@@ -1,6 +1,6 @@
 ﻿/*
-	Credit to Pascal Laurin for original SquarifiedTreeMap code
-	http://pascallaurin42.blogspot.com/2013/12/implementing-treemap-in-c.html
+Credit to Pascal Laurin for original SquarifiedTreeMap code
+http://pascallaurin42.blogspot.com/2013/12/implementing-treemap-in-c.html
 */
 
 using System;
