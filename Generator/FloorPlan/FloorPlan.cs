@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using RTFP.Generator.FloorPlan;
+using RTFP.DataStructures;
+using System.Drawing;
 
 namespace RTFP.Generator.FloorPlan
 {
@@ -24,7 +26,7 @@ namespace RTFP.Generator.FloorPlan
 			return sb.ToString();
 		}
 
-		public int[] GetAreaArray()
+		private int[] GetAreaArray()
 		{
 			List<int> list = new List<int>();
 
@@ -34,6 +36,34 @@ namespace RTFP.Generator.FloorPlan
 			}));
 
 			return list.ToArray();
+		}
+
+		public List<Point> GenerateVertices()
+		{
+			// We need to move width and height to properties of our floor plan,
+			// floor plan structure needs to be reworked 
+			int Width = 250, Height = 250;
+			const double MinSliceRatio = 0.35;
+
+			var elements = GetAreaArray()
+				.Select(x => new SquarifiedTreeMap.Element<string> { Object = x.ToString(), Value = x })
+				.OrderByDescending(x => x.Value)
+				.ToList();
+
+			var slice = SquarifiedTreeMap.GetSlice(elements, 1, MinSliceRatio);
+
+			var rectangles = SquarifiedTreeMap.GetRectangles(slice, Width, Height).ToList();
+
+			List<Point> points = new List<Point>();
+			foreach(var r in rectangles)
+			{
+				points.Add(new Point(r.X, r.Y));
+				points.Add(new Point(r.X + r.Width, r.Y));
+				points.Add(new Point(r.X, r.Y + r.Height));
+				points.Add(new Point(r.X + r.Width, r.Y + r.Height));
+			}
+
+			return points;
 		}
 	}
 }
