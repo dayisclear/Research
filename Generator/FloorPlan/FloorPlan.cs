@@ -12,7 +12,7 @@ namespace RTFP.Generator.FloorPlan
 {
 	public class FloorPlan
 	{
-		List<Edge> Edges { get; set; }
-		List<Vertex> Vertices { get; set; }
+		public List<Edge> Edges { get; set; }
+		public List<Vertex> Vertices { get; set; }
 	}
 }
