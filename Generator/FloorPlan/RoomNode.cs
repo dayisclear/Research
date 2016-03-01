@@ -46,6 +46,9 @@ namespace RTFP.Generator.FloorPlan
 					.OrderByDescending(x => x.Value)
 					.ToList();
 
+			// We want to include our own area inside our tree map
+			nodes.Insert(0, new SquarifiedTreeMap.Element<RoomNode> { Object = null, Value = Area });
+
 			var slice = SquarifiedTreeMap.GetSlice(nodes, 1, MinSliceRatio);
 			var rectangles = SquarifiedTreeMap.GetRectangles(slice, Width, Height).ToList();
 
@@ -70,7 +73,15 @@ namespace RTFP.Generator.FloorPlan
 				// Build our rooms internal tree map
 				foreach (var child in r.Slice.Elements)
 				{
-					FloorPlan fp = child.Object.ToFloorPlan();
+					// Child tree map is (r.Width x r.Height) 
+					FloorPlan fp = child.Object.ToFloorPlan(r.Width, r.Height);
+
+					// Child tree map uses local coordinates of parent room,
+					// we must off set these for our global floor plan
+					Vertex offset = new Vertex(r.X, r.Y);
+
+					foreach (Vertex v in fp.Vertices)
+						v.Add(offset);
 
 					vertices.AddRange(fp.Vertices);
 					edges.AddRange(fp.Edges);
