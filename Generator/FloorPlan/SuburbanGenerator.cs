@@ -27,23 +27,18 @@ namespace RTFP.Generator.FloorPlan
 			// using sample constraint set until constraint stuff is finished
 			Constraints = new ConstraintSet();
 
-			// suburban room should have following constraints:
-			// # rooms, # bed rooms, # bathrooms, # kitchens
-			// % liklihood of bathroom/closet in bedrooms
-			Constraints.Add("Rooms", new MinMax(1, 4));
-			Constraints.Add("AreaRooms", new MinMax(1200, 2400));
-
+			// Temporary constraints until we add building grammar
 			Constraints.Add("LivingRooms", new MinMax(1, 1));
 			Constraints.Add("AreaLivingRooms", new MinMax(400, 800));
 
 			Constraints.Add("BedRooms", new MinMax(1, 2));
 			Constraints.Add("AreaBedRooms", new MinMax(200, 400));
 
-			Constraints.Add("Kitchens", new MinMax(0, 1));
-			Constraints.Add("AreaKitchens", new MinMax(50, 200));
+			Constraints.Add("Bathrooms", new MinMax(0, 1));
+			Constraints.Add("AreaBathrooms", new MinMax(50, 100));
 
-			Constraints.Add("ExtraChildRooms", new MinMax(0, 1));
-			Constraints.Add("AreaExtraChildRooms", new MinMax(50, 100));
+			Constraints.Add("Kitchens", new MinMax(1, 1));
+			Constraints.Add("AreaKitchens", new MinMax(50, 200));
 		}
 
 		public FloorPlan GenerateFloorPlan()
@@ -51,13 +46,28 @@ namespace RTFP.Generator.FloorPlan
 			Room main = GenerateValidRoom(RoomType.LivingRoom);
 			FloorPlan floorplan = new FloorPlan(main);
 
-			// rooms = main + roll
-			int rooms = (int) Constraints.GenerateValue("Rooms");
-			for(int i = 0; i < rooms; i++)
+			int bedrooms = (int) Constraints.GenerateValue("BedRooms");
+			int bathrooms = (int) Constraints.GenerateValue("Bathrooms");
+			int kitchens = (int) Constraints.GenerateValue("Kitchens");
+
+			// generate bed rooms
+			for(int i = 0; i < bedrooms; i++)
 			{
 				floorplan.AddChildToParent(main, GenerateValidRoom(RoomType.BedRoom));
 			}
 
+			// genrate bathroom
+			for (int i = 0; i < bathrooms; i++)
+			{
+				floorplan.AddChildToParent(main, GenerateValidRoom(RoomType.Bathroom));
+			}
+
+			// generate kitchen
+			for (int i = 0; i < kitchens; i++)
+			{
+				floorplan.AddChildToParent(main, GenerateValidRoom(RoomType.Kitchen));
+			}
+			
 			return floorplan;
 		}
 
@@ -67,24 +77,23 @@ namespace RTFP.Generator.FloorPlan
 			switch(type)
 			{
 				case RoomType.LivingRoom:
-					{
-						room.Area = (int) Constraints.GenerateValue("AreaLivingRooms");
-					}
+					room.Area = (int) Constraints.GenerateValue("AreaLivingRooms");
 					break;
+
 				case RoomType.BedRoom:
-					{
-						room.Area = (int) Constraints.GenerateValue("AreaBedRooms");
-					}
+					room.Area = (int) Constraints.GenerateValue("AreaBedRooms");
 					break;
+
 				case RoomType.Kitchen:
-					{
-						room.Area = (int) Constraints.GenerateValue("AreaKitchens");
-					}
+					room.Area = (int) Constraints.GenerateValue("AreaKitchens");
 					break;
+
 				case RoomType.Bathroom:
-					{
-						room.Area = (int) Constraints.GenerateValue("AreaExtraChildRooms");
-					}
+					room.Area = (int) Constraints.GenerateValue("AreaBathrooms");
+					break;
+
+				case RoomType.ExtraRoom:
+					room.Area = (int) Constraints.GenerateValue("AreaExtraChildRooms");
 					break;
 			}
 			return room;

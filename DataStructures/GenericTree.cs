@@ -15,7 +15,7 @@ namespace RTFP.DataStructures
 
 	public class GenericTree<T>
 	{
-		protected T data;
+		private T data;
 		private LinkedList<GenericTree<T>> children;
 
 		public GenericTree(T data)
@@ -32,12 +32,14 @@ namespace RTFP.DataStructures
 		public void AddChildToParent(T parent, T child)
 		{
 			if (data.Equals(parent))
+			{
 				this.AddChild(child);
+			}
 			else
 			{
 				foreach (GenericTree<T> n in children)
 				{
-					if (n.data.Equals(data))
+					if (n.data.Equals(parent))
 					{
 						n.AddChild(child);
 						return;

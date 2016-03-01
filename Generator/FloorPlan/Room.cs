@@ -11,7 +11,8 @@ namespace RTFP.Generator.FloorPlan
 		LivingRoom,
 		BedRoom,
 		Kitchen,
-		Bathroom
+		Bathroom,
+		ExtraRoom
 	}
 
 	public class Room

@@ -18,10 +18,9 @@ namespace RTFP
 			SuburbanGenerator generator = new SuburbanGenerator();
 			FloorPlan fp = generator.GenerateFloorPlan();
 
-			GenerateFloorPlan(fp.GetAreaArray());
-
 			Console.WriteLine(fp);
-			
+
+			GenerateFloorPlan(fp.GetAreaArray());
 		}
 
 		public static void GenerateFloorPlan(int[] arr)
