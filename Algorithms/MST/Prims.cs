@@ -43,7 +43,8 @@ namespace RTFP.Algorithms.MST
 							{
 								var to = edge.Source == node ? edge.Destination : edge.Source;
 
-								// we haven't visited this node yet
+								// We haven't visited this node yet so it becomes
+								// our new min
 								if (!visited.Contains(to))
 									min = edge;
 							}
@@ -109,15 +110,13 @@ namespace RTFP.Algorithms.MST
 			foreach (var n in mst) Console.WriteLine(n);
 
 			/*
-
-			Expected output:
-				b -> a
-				c -> a
-				c -> e
-				d -> a
-				f -> c
-				f -> g
-
+				Expected output:
+					b -> a
+					c -> a
+					c -> e
+					d -> a
+					f -> c
+					f -> g
 			*/
 		}
 	}
