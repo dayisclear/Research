@@ -13,12 +13,6 @@ namespace RTFP.Generator.FloorPlan
 {
 	public class FloorPlan
 	{
-		public class Room
-		{
-			public int X, Y, Width, Height;
-			public RoomType Type;
-		}
-
 		public List<Room> Rooms { get; set; }
 
 		public FloorPlan()

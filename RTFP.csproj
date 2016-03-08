@@ -56,6 +56,7 @@
     <Compile Include="Generator\Constraints\MinMax.cs" />
     <Compile Include="Generator\FloorPlan\FloorPlanGenerator.cs" />
     <Compile Include="Generator\FloorPlan\FloorPlan.cs" />
+    <Compile Include="Generator\FloorPlan\Room.cs" />
     <Compile Include="Generator\FloorPlan\RoomNode.cs" />
     <Compile Include="DataStructures\SquarifiedTreeMap.cs" />
     <Compile Include="Generator\Generator.cs" />

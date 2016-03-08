@@ -11,15 +11,6 @@ using RTFP.Generator.Constraints;
 
 namespace RTFP.Generator.FloorPlan
 {
-	public enum RoomType
-	{
-		LivingRoom,
-		BedRoom,
-		Kitchen,
-		Bathroom,
-		ExtraRoom
-	}
-
 	public class RoomNode
 	{
 		public RoomType Type { get; set; }
