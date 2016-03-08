@@ -16,7 +16,7 @@ namespace RTFP
 	{
 		static void Main()
 		{
-			Graph ga = new Graph();
+			Graph tree = new Graph();
 
 			Object a = "a";
 			Object b = "b";
@@ -26,31 +26,32 @@ namespace RTFP
 			Object f = "f";
 			Object g = "g";
 
-			ga.AddEdge(ref a, ref b, 2);
-			ga.AddEdge(ref a, ref c, 3);
-			ga.AddEdge(ref a, ref d, 3);
+			tree.AddEdge( a,  b, 2);
+			tree.AddEdge( a,  c, 3);
+			tree.AddEdge( a,  d, 3);
 
-			ga.AddEdge(ref b, ref a, 2);
-			ga.AddEdge(ref b, ref c, 4);
-			ga.AddEdge(ref b, ref e, 3);
+			tree.AddEdge( b,  a, 2);
+			tree.AddEdge( b,  c, 4);
+			tree.AddEdge( b,  e, 3);
 
-			ga.AddEdge(ref c, ref a, 3);
-			ga.AddEdge(ref c, ref b, 4);
-			ga.AddEdge(ref c, ref e, 1);
-			ga.AddEdge(ref c, ref d, 5);
-			ga.AddEdge(ref c, ref f, 6);
+			tree.AddEdge( c,  a, 3);
+			tree.AddEdge( c,  b, 4);
+			tree.AddEdge( c,  e, 1);
+			tree.AddEdge( c,  d, 5);
+			tree.AddEdge( c,  f, 6);
 
-			ga.AddEdge(ref d, ref a, 3);
-			ga.AddEdge(ref d, ref c, 5);
-			ga.AddEdge(ref d, ref f, 7);
+			tree.AddEdge( d,  a, 3);
+			tree.AddEdge( d,  c, 5);
+			tree.AddEdge( d,  f, 7);
 
-			ga.AddEdge(ref f, ref d, 7);
-			ga.AddEdge(ref f, ref c, 6);
-			ga.AddEdge(ref f, ref e, 8);
+			tree.AddEdge( f,  d, 7);
+			tree.AddEdge( f,  c, 6);
+			tree.AddEdge( f,  e, 8);
 
-			ga.AddEdge(ref f, ref g, 9);
+			tree.AddEdge( f,  g, 9);
 
-			Algorithms.MST.Prims.FindMST(ref a, ga);
+			var mst = Algorithms.MST.Prims.FindMST( a, tree);
+			foreach (var n in mst) Console.WriteLine(n);
 			Console.Read();
 
 

@@ -10,14 +10,13 @@ namespace RTFP.Algorithms.MST
 {
 	public static class Prims
 	{
-		public static Graph FindMST(ref Object source, Graph graph)
+		public static List<Graph.Edge> FindMST(Object source, Graph graph)
 		{
 			// Setup our things
 			var matrix = graph.AdjacencyMatrix;
 
-			List<Graph.Edge> test = new List<Graph.Edge>();
+			List<Graph.Edge> mst = new List<Graph.Edge>();
 			List<Object> visited = new List<Object>();
-			Graph mst = new Graph();
 
 			// Add our source node to our visited list
 			visited.Add(source);
@@ -25,38 +24,32 @@ namespace RTFP.Algorithms.MST
 			// While we haven't visited all nodes
 			while(visited.Count < graph.Size)
 			{
-				Object from = null, to = null;
 				Graph.Edge min = null;
 
 				// Check all paths leading from our connected nodes
-				for(int j = 0; j < visited.Count; j++)
+				foreach(var node in visited)
 				{
-					var node = visited[j];
-
 					// interate across its connections to find a cheapest
 					for (int i = 0; i < matrix.GetLength(0); i++)
 					{
-						var edge = matrix[graph.IndexOf(ref node), i];
-
-						if (edge == null)
-							continue;
+						var edge = matrix[graph.IndexOf(node), i];
 
 						// we have found an edge leading from our connected to an unconnected and is cheaper
-						if(	min == null || edge.Cost < min.Cost)
+						if(edge != null)
 						{
-							from = node;
-							to = edge.Source == node ? edge.Destination : edge.Source;
-
-							// we haven't visited this node yet
-							if (!visited.Contains(to))
+							if (min == null || edge.Cost < min.Cost)
 							{
-								min = edge;
-								to = null;
+								var to = edge.Source == node ? edge.Destination : edge.Source;
+
+								// we haven't visited this node yet
+								if (!visited.Contains(to))
+									min = edge;
 							}
 						}
 					}
 				}
 
+				// If we have found a new minimum edge, lets add it to our mst
 				if(min != null)
 				{
 					if(!visited.Contains(min.Destination))
@@ -65,14 +58,11 @@ namespace RTFP.Algorithms.MST
 					if (!visited.Contains(min.Source))
 						visited.Add(min.Source);
 
-					test.Add(min);
+					mst.Add(min);
 				}
 			}
 
-			foreach (var e in test)
-				Console.WriteLine(e);
-
-			return null;
+			return mst;
 		}
 	}
 }

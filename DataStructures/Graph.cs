@@ -12,7 +12,7 @@ namespace RTFP.DataStructures
 		{
 			public Object Source, Destination;
 			public int Cost;
-			public Edge(ref Object src, ref Object dst, int cost)
+			public Edge(Object src, Object dst, int cost)
 			{
 				this.Source = src;
 				this.Destination = dst;
@@ -50,25 +50,25 @@ namespace RTFP.DataStructures
 			get { return Nodes.Count; }
 		}
 
-		public int IndexOf(ref Object Object)
+		public int IndexOf(Object Object)
 		{
 			return Nodes.IndexOf(Object);
 		}
 
-		public void AddNode(ref Object Object)
+		public void AddNode(Object Object)
 		{
 			Nodes.Add(Object);
 		}
 
-		public void AddEdge(ref Object from, ref Object to, int cost)
+		public void AddEdge(Object from, Object to, int cost)
 		{
 			if (!Nodes.Contains(from))
-				AddNode(ref from);
+				AddNode(from);
 
 			if (!Nodes.Contains(to))
-				AddNode(ref to);
+				AddNode(to);
 
-			Edges.Add(new Edge(ref from, ref to, cost));
+			Edges.Add(new Edge(from, to, cost));
 		}
 	}
 }
