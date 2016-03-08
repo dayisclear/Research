@@ -16,13 +16,51 @@ namespace RTFP
 	{
 		static void Main()
 		{
-			SuburbanGenerator generator = new SuburbanGenerator();
+			Graph ga = new Graph();
+
+			Object a = "a";
+			Object b = "b";
+			Object c = "c";
+			Object d = "d";
+			Object e = "e";
+			Object f = "f";
+			Object g = "g";
+
+			ga.AddEdge(ref a, ref b, 2);
+			ga.AddEdge(ref a, ref c, 3);
+			ga.AddEdge(ref a, ref d, 3);
+
+			ga.AddEdge(ref b, ref a, 2);
+			ga.AddEdge(ref b, ref c, 4);
+			ga.AddEdge(ref b, ref e, 3);
+
+			ga.AddEdge(ref c, ref a, 3);
+			ga.AddEdge(ref c, ref b, 4);
+			ga.AddEdge(ref c, ref e, 1);
+			ga.AddEdge(ref c, ref d, 5);
+			ga.AddEdge(ref c, ref f, 6);
+
+			ga.AddEdge(ref d, ref a, 3);
+			ga.AddEdge(ref d, ref c, 5);
+			ga.AddEdge(ref d, ref f, 7);
+
+			ga.AddEdge(ref f, ref d, 7);
+			ga.AddEdge(ref f, ref c, 6);
+			ga.AddEdge(ref f, ref e, 8);
+
+			ga.AddEdge(ref f, ref g, 9);
+
+			Algorithms.MST.Prims.FindMST(ref a, ga);
+			Console.Read();
+
+
+		/*	SuburbanGenerator generator = new SuburbanGenerator();
 
 			while (true)
 			{
 				FloorPlan fp = generator.GenerateFloorPlan();
 				DrawFloorPlan(fp);
-			}
+			}*/
 		}
 
 		private static void DrawFloorPlan(FloorPlan fp)

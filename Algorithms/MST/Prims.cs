@@ -5,51 +5,74 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace RTFP.Algorithms.MST
 {
 	public static class Prims
 	{
-		public static bool FindMST(int source, int[,] matrix)
+		public static Graph FindMST(ref Object source, Graph graph)
 		{
-			List<int> mst = new List<int>();
-			mst.Add(source);
+			// Setup our things
+			var matrix = graph.AdjacencyMatrix;
 
-			// While we haven't added all our nodes to the mst
-			while(mst.Count < matrix.Length)
+			List<Graph.Edge> test = new List<Graph.Edge>();
+			List<Object> visited = new List<Object>();
+			Graph mst = new Graph();
+
+			// Add our source node to our visited list
+			visited.Add(source);
+
+			// While we haven't visited all nodes
+			while(visited.Count < graph.Size)
 			{
-				int from = Int32.MinValue;
-				int min = Int32.MaxValue;
+				Object from = null, to = null;
+				Graph.Edge min = null;
 
-				// Iterate across current mst nodes and find cheapest edge
-				for(int i = 0; i < mst.Count; i++)
+				// Check all paths leading from our connected nodes
+				for(int j = 0; j < visited.Count; j++)
 				{
-					// Iterate across mst node's connections looking for a better min
-					for (int j = 0; j < matrix.Length; j++)
-					{
-						int current = mst[i];
+					var node = visited[j];
 
-						// Make sure edge is better than min and connected
-						if (matrix[current, j] < min && matrix[current, j] > 0)
+					// interate across its connections to find a cheapest
+					for (int i = 0; i < matrix.GetLength(0); i++)
+					{
+						var edge = matrix[graph.IndexOf(ref node), i];
+
+						if (edge == null)
+							continue;
+
+						// we have found an edge leading from our connected to an unconnected and is cheaper
+						if(	min == null || edge.Cost < min.Cost)
 						{
-							// Make sure we haven't already visited the node
-							if (!mst.Contains(matrix[current, j]))
+							from = node;
+							to = edge.Source == node ? edge.Destination : edge.Source;
+
+							// we haven't visited this node yet
+							if (!visited.Contains(to))
 							{
-								min = i;
-								from = mst[i];
+								min = edge;
+								to = null;
 							}
 						}
 					}
 				}
 
-				// If we successfully found a cheap path lets add it to the mst
-				if(min != Int32.MaxValue && from != Int32.MinValue)
+				if(min != null)
 				{
-					mst.Add(min);
+					if(!visited.Contains(min.Destination))
+						visited.Add(min.Destination);
+
+					if (!visited.Contains(min.Source))
+						visited.Add(min.Source);
+
+					test.Add(min);
 				}
-				else return false;
 			}
 
-			return true;
+			foreach (var e in test)
+				Console.WriteLine(e);
+
+			return null;
 		}
 	}
 }
