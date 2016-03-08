@@ -10,6 +10,7 @@ namespace RTFP.Algorithms.MST
 {
 	public static class Prims
 	{
+		// TODO: optimize/clean up
 		public static List<Graph.Edge> FindMST(Object source, Graph graph)
 		{
 			var matrix = graph.AdjacencyMatrix;
