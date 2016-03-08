@@ -12,7 +12,6 @@ namespace RTFP.Algorithms.MST
 	{
 		public static List<Graph.Edge> FindMST(Object source, Graph graph)
 		{
-			// Setup our things
 			var matrix = graph.AdjacencyMatrix;
 
 			List<Graph.Edge> mst = new List<Graph.Edge>();
@@ -29,12 +28,14 @@ namespace RTFP.Algorithms.MST
 				// Check all paths leading from our connected nodes
 				foreach(var node in visited)
 				{
-					// interate across its connections to find a cheapest
+					// Iterate across its connections to find a cheaper
+					// edge
 					for (int i = 0; i < matrix.GetLength(0); i++)
 					{
 						var edge = matrix[graph.IndexOf(node), i];
 
-						// we have found an edge leading from our connected to an unconnected and is cheaper
+						// We have found an edge leading from our connected to 
+						// an unconnected and is cheaper
 						if(edge != null)
 						{
 							if (min == null || edge.Cost < min.Cost)
