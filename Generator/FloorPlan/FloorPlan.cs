@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using RTFP.DataStructures;
 using RTFP.DataStructures.Geometry;
+
 using RTFP.Generator.FloorPlan;
 
 namespace RTFP.Generator.FloorPlan

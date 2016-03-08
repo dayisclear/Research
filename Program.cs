@@ -7,8 +7,8 @@ using System.Drawing;
 
 using RTFP.DataStructures;
 using RTFP.DataStructures.Geometry;
+
 using RTFP.Generator.FloorPlan;
-using System.Reflection;
 
 namespace RTFP
 {
