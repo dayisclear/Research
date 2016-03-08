@@ -28,7 +28,14 @@ namespace RTFP
 		private static void DrawFloorPlan(FloorPlan fp)
 		{
 			int width = 252, height = 252;
-			Brush[] brushes = new Brush[] { Brushes.Gray, Brushes.DarkGray, Brushes.LightGray, Brushes.LightSlateGray, Brushes.BurlyWood };
+			Brush[] brushes = new Brush[] 
+			{ 
+				Brushes.Gray, 
+				Brushes.DarkGray, 
+				Brushes.LightGray, 
+				Brushes.LightSlateGray, 
+				Brushes.BurlyWood 
+			};
 
 			// Create our canvas to work with
 			var font = new Font("Arial", 8);
@@ -50,7 +57,17 @@ namespace RTFP
 
 			// Display form
 			var form = new Form() { AutoSize = true };
-			form.Controls.Add(new PictureBox() { Width = width, Height = height, Image = bmp, Location = new Point(5, 5) });
+			form.Controls.Add
+			(
+				new PictureBox() 
+				{ 
+					Width = width, 
+					Height = height, 
+					Image = bmp, 
+					Location = new Point(5, 5)
+				}
+			);
+
 			form.ShowDialog();
 		}
 	}
