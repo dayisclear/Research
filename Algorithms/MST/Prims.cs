@@ -35,10 +35,10 @@ namespace RTFP.Algorithms.MST
 					{
 						var edge = matrix[graph.IndexOf(node), i];
 
-						// We have found an edge leading from our connected to 
-						// an unconnected and is cheaper
 						if(edge != null)
 						{
+							// We have found an edge leading from our connected to 
+							// an unconnected and is cheaper
 							if (min == null || edge.Cost < min.Cost)
 							{
 								var to = edge.Source == node ? edge.Destination : edge.Source;
