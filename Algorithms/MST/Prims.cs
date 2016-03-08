@@ -66,6 +66,7 @@ namespace RTFP.Algorithms.MST
 			return mst;
 		}
 
+		// TODO: Change this to a unit test
 		public static void TestPrim()
 		{
 			Graph tree = new Graph();
