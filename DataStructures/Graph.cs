@@ -35,8 +35,6 @@ namespace RTFP.DataStructures
 
 				foreach (Edge e in Edges)
 				{
-					int x = Nodes.IndexOf(e.Source);
-					int y = Nodes.IndexOf(e.Destination);
 					matrix[Nodes.IndexOf(e.Source), Nodes.IndexOf(e.Destination)] = e;
 					matrix[Nodes.IndexOf(e.Destination), Nodes.IndexOf(e.Source)] = e;
 				}
